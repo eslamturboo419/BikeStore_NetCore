@@ -1,0 +1,213 @@
+﻿@model WebApplication1.Models.BikeVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+@*
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    function Here() {
+
+        var makeDDL = ("#Make");
+        var modelDDL = ("#Model");
+        modelDDL.prop("disabled", true);
+
+
+        makeDDL.change(function(){
+            if ($(this).val() == "0") {
+                modelDDL.prop("disabled", true);
+                modelDDL.val("0");
+            }else{
+                modelDDL.prop("disabled", false);
+                $.ajax({
+                type: "GET",
+                url: '/api/models/' + $(this).val(),
+                success: function (data) {
+                modelDDL.prop("disabled", false);
+                modelDDL.empty();
+                modelDDL.append($('<option/>', { value: 0, text: "-- Selct Model ---" }));
+
+                    $(data).each(function(index, item) {
+                         modelDDL.append($('<option/>', { value: item.id, text:item.name }));
+                    });
+                        
+                }
+            }
+        })
+
+
+        }
+
+    $(document).ready(function () {Here();});              
+</script>
+*@
+
+
+<br />
+
+<h2 class="text-info">Create</h2>
+ 
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+
+                <div class="form-group row">
+                <div class="col-2">
+                <label asp-for="Makes" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="Bike.MakeID"  asp-items="@ViewBag.AllAuthor" class="form-control" id="Make"></select>
+                    
+                </div>            
+            </div>
+
+
+                      <div class="form-group row">
+                <div class="col-2">
+                <label asp-for="Models" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="Bike.ModelID" asp-items="@ViewBag.AllAuthor2" class="form-control" id="Model" ></select>
+                </div>            
+            </div>
+
+
+        
+
+
+        
+
+
+            <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.Year" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.Year" class="form-control" />
+                </div>    
+            </div>
+
+
+              <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.Mileage" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.Mileage" class="form-control" />
+                </div>    
+            </div>
+
+
+                 <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.Price" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.Price" class="form-control" />
+                </div>    
+            </div>
+
+
+            
+                 <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.Features" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <textarea asp-for="Bike.Features" class="form-control" ></textarea>
+                </div>    
+            </div>
+
+
+                 <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.SeallerName" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.SeallerName" class="form-control" />
+                </div>    
+            </div>
+             <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.SeallerEmail" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.SeallerEmail" class="form-control" />
+                </div>    
+            </div>
+
+
+             <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.SeallerPhone" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Bike.SeallerPhone" class="form-control" />
+                </div>    
+            </div>
+
+
+
+                      <div class="form-group row">
+                     <div class="col-2">
+                <label asp-for="Bike.ImgURL" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input type="file" name="File" asp-for="File" class="form-control" />
+                </div>    
+            </div>
+
+
+            
+         @*   <div class="form-group row">
+                     <div class="col-2">
+                <label class="control-label"> First Way "Use The Old One" </label>    
+                </div>
+                <div class="col-6">
+                    <select asp-for="Bike.Currency" class="form-control" >
+                        <option  > ----- </option>
+                        <option value="USD"> USD </option>
+                        <option value="INR"> INR </option>
+                        <option value="EUR"> EUR </option>
+                    </select>
+                </div>    
+            </div>
+
+
+
+                   <div class="form-group row">
+                     <div class="col-2">
+                <label class="control-label">  Second Way " View Bag " </label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="Bike.Currency"  asp-items="@ViewBag.CureencyList" class="form-control" ></select>            
+                </div>    
+            </div>*@
+                
+
+                 <div class="form-group row">
+                     <div class="col-2">
+                <label class="control-label" asp-for="Bike.Currency"></label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="Bike.Currency"  asp-items='@(new SelectList(Model.Currencies,"Id","Name"))' class="form-control" ></select>            
+                </div>    
+            </div>
+                
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success"> Back </a>
+
+            </div>
+        </form>
+    </div>
+</div>
+ 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

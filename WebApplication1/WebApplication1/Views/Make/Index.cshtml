@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Make>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<br /><br />
+
+<div class="row">
+
+    <div class="col-6">
+        <h2 class="text-info"> Make A vehicle </h2>
+    </div>
+
+    <div class="col-6 text-right">
+        <a asp-action="Create" asp-controller="Make" class="btn btn-info"> <i class="fa fa-motorcycle"></i>  Add New  </a>
+    </div>
+    <br /> <br />
+    <div class="col-12">
+        <table class="table border table-striped table-hover">
+            <tr class="table-info">
+                <th> Name </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.Name </td>
+                    <td class="text-right">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-primary" asp-action="Edit" asp-controller="Make" asp-route-id="@item.Id" > <i class="far fa-edit"></i> </a> |
+                            <a class="btn btn-danger rounded-0" asp-action="Delete" asp-controller="Make" asp-route-id="@item.Id" onclick="return confirm('Are You Sure To Delete This')" >  <i class="far fa-trash-alt"></i>  </a>
+                        </div>
+                        </td>
+                </tr>
+            }
+
+
+
+        </table>
+
+    </div>
+
+
+</div>
